@@ -1,0 +1,336 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ============================================
+    // HELPER FUNCTIONS
+    // ============================================
+    
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Get user document
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    // Check if user is platform admin
+    function isPlatformAdmin() {
+      return isAuthenticated() && getUserData().role == 'platform_admin';
+    }
+    
+    // Check if user is pesantren admin
+    function isPesantrenAdmin() {
+      return isAuthenticated() && getUserData().role == 'pesantren_admin';
+    }
+    
+    // Check if user is koperasi admin
+    function isKoperasiAdmin() {
+      return isAuthenticated() && getUserData().role == 'koperasi_admin';
+    }
+    
+    // Check if user is ustadz
+    function isUstadz() {
+      return isAuthenticated() && getUserData().role == 'ustadz';
+    }
+    
+    // Check if user is wali santri
+    function isWaliSantri() {
+      return isAuthenticated() && getUserData().role == 'wali_santri';
+    }
+    
+    // Check if user belongs to tenant
+    function belongsToTenant(tenantId) {
+      return isAuthenticated() && 
+        (isPlatformAdmin() || getUserData().tenantId == tenantId);
+    }
+    
+    // ============================================
+    // USERS COLLECTION
+    // ============================================
+    
+    match /users/{userId} {
+      // Anyone authenticated can read their own data
+      allow read: if isAuthenticated() && request.auth.uid == userId;
+      
+      // Platform admin can read all users
+      allow read: if isPlatformAdmin();
+      
+      // Users can update their own data (limited fields)
+      allow update: if isAuthenticated() && 
+        request.auth.uid == userId &&
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'tenantId', 'status']);
+      
+      // Only platform admin can create/delete users
+      allow create, delete: if isPlatformAdmin();
+    }
+    
+    // ============================================
+    // PESANTREN COLLECTION
+    // ============================================
+    
+    match /pesantren/{pesantrenId} {
+      // Anyone authenticated can read pesantren basic info
+      allow read: if isAuthenticated();
+      
+      // Only platform admin can create/update/delete pesantren
+      allow create, update, delete: if isPlatformAdmin();
+      
+      // ==========================================
+      // SANTRI SUB-COLLECTION
+      // ==========================================
+      
+      match /santri/{santriId} {
+        // Can read if belongs to tenant or wali of this santri
+        allow read: if belongsToTenant(pesantrenId) || 
+          (isWaliSantri() && santriId in getUserData().santriIds);
+        
+        // Can write if belongs to tenant (admin/ustadz)
+        allow create, update: if belongsToTenant(pesantrenId);
+        
+        // Only pesantren admin can delete
+        allow delete: if isPesantrenAdmin() && belongsToTenant(pesantrenId);
+      }
+      
+      // ==========================================
+      // USTADZ SUB-COLLECTION
+      // ==========================================
+      
+      match /ustadz/{ustadzId} {
+        // Can read if belongs to tenant
+        allow read: if belongsToTenant(pesantrenId);
+        
+        // Can write if pesantren admin
+        allow create, update, delete: if isPesantrenAdmin() && belongsToTenant(pesantrenId);
+      }
+      
+      // ==========================================
+      // WALI SUB-COLLECTION
+      // ==========================================
+      
+      match /wali/{waliId} {
+        // Can read if belongs to tenant or is the wali themselves
+        allow read: if belongsToTenant(pesantrenId) || 
+          (isWaliSantri() && request.auth.uid == waliId);
+        
+        // Can write if pesantren admin
+        allow create, update, delete: if isPesantrenAdmin() && belongsToTenant(pesantrenId);
+      }
+      
+      // ==========================================
+      // TAGIHAN SUB-COLLECTION
+      // ==========================================
+      
+      match /tagihan/{tagihanId} {
+        // Can read if belongs to tenant or wali santri
+        allow read: if belongsToTenant(pesantrenId) || isWaliSantri();
+        
+        // Can write if pesantren admin
+        allow create, update, delete: if isPesantrenAdmin() && belongsToTenant(pesantrenId);
+      }
+      
+      // ==========================================
+      // KOPERASI SUB-COLLECTION
+      // ==========================================
+      
+      match /koperasi/{koperasiId} {
+        // Can read if belongs to tenant
+        allow read: if belongsToTenant(pesantrenId);
+        
+        // Can write if pesantren admin
+        allow create, update, delete: if isPesantrenAdmin() && belongsToTenant(pesantrenId);
+      }
+      
+      // ==========================================
+      // ANNOUNCEMENTS SUB-COLLECTION
+      // ==========================================
+      
+      match /announcements/{announcementId} {
+        // Can read if belongs to tenant or wali santri
+        allow read: if belongsToTenant(pesantrenId) || isWaliSantri();
+        
+        // Can write if pesantren admin
+        allow create, update, delete: if isPesantrenAdmin() && belongsToTenant(pesantrenId);
+      }
+      
+      // ==========================================
+      // DISCUSSIONS SUB-COLLECTION
+      // ==========================================
+      
+      match /discussions/{discussionId} {
+        // Can read if belongs to tenant or wali santri
+        allow read: if belongsToTenant(pesantrenId) || isWaliSantri();
+        
+        // Can create if wali santri or belongs to tenant
+        allow create: if isWaliSantri() || belongsToTenant(pesantrenId);
+        
+        // Can update/delete own posts
+        allow update, delete: if isAuthenticated() && 
+          resource.data.authorId == request.auth.uid;
+        
+        // Admin can delete any post
+        allow delete: if isPesantrenAdmin() && belongsToTenant(pesantrenId);
+      }
+      
+      // ==========================================
+      // OTHER SUB-COLLECTIONS (JADWAL, PERIZINAN, KEGIATAN, etc)
+      // ==========================================
+      
+      match /{subcollection}/{docId} {
+        // Can read if belongs to tenant
+        allow read: if belongsToTenant(pesantrenId);
+        
+        // Can write if belongs to tenant (admin/ustadz)
+        allow create, update: if belongsToTenant(pesantrenId);
+        
+        // Only admin can delete
+        allow delete: if isPesantrenAdmin() && belongsToTenant(pesantrenId);
+      }
+    }
+    
+    // ============================================
+    // KOPERASI/TOKO COLLECTION
+    // ============================================
+    
+    match /koperasi/{koperasiId} {
+      // Can read if authenticated
+      allow read: if isAuthenticated();
+      
+      // Can write if platform admin or koperasi admin
+      allow create, update, delete: if isPlatformAdmin() || 
+        (isKoperasiAdmin() && getUserData().koperasiId == koperasiId);
+      
+      // Products sub-collection
+      match /products/{productId} {
+        // Can read if authenticated
+        allow read: if isAuthenticated();
+        
+        // Can write if koperasi admin or pesantren admin
+        allow create, update, delete: if isKoperasiAdmin() || isPesantrenAdmin();
+      }
+      
+      // Transactions sub-collection
+      match /transactions/{transactionId} {
+        // Can read if koperasi admin or pesantren admin
+        allow read: if isKoperasiAdmin() || isPesantrenAdmin();
+        
+        // Can create transaction (kasir)
+        allow create: if isKoperasiAdmin();
+        
+        // No update/delete for transactions (immutable)
+        allow update, delete: if false;
+      }
+      
+      // Online orders sub-collection
+      match /online_orders/{orderId} {
+        // Can read if koperasi admin, pesantren admin, or wali santri who created it
+        allow read: if isKoperasiAdmin() || isPesantrenAdmin() || 
+          (isWaliSantri() && resource.data.waliId == request.auth.uid);
+        
+        // Wali can create order
+        allow create: if isWaliSantri();
+        
+        // Koperasi admin can update order status
+        allow update: if isKoperasiAdmin();
+      }
+      
+      // Other sub-collections (categories, suppliers, etc)
+      match /{subcollection}/{docId} {
+        allow read: if isKoperasiAdmin() || isPesantrenAdmin();
+        allow create, update, delete: if isKoperasiAdmin() || isPesantrenAdmin();
+      }
+    }
+    
+    // ============================================
+    // PLATFORM SETTINGS
+    // ============================================
+    
+    match /platform_settings/{settingId} {
+      // Anyone can read settings
+      allow read: if isAuthenticated();
+      
+      // Only platform admin can write
+      allow create, update, delete: if isPlatformAdmin();
+    }
+    
+    // ============================================
+    // GLOBAL CONTENT
+    // ============================================
+    
+    match /global_content/{contentId} {
+      // Anyone authenticated can read approved content
+      allow read: if isAuthenticated() && resource.data.status == 'approved';
+      
+      // Platform admin can read all
+      allow read: if isPlatformAdmin();
+      
+      // Pesantren admin can create content (pending approval)
+      allow create: if isPesantrenAdmin();
+      
+      // Platform admin can approve/reject
+      allow update: if isPlatformAdmin();
+      
+      // Only platform admin can delete
+      allow delete: if isPlatformAdmin();
+    }
+    
+    // ============================================
+    // CONTENT CATEGORIES
+    // ============================================
+    
+    match /content_categories/{categoryId} {
+      // Anyone can read
+      allow read: if isAuthenticated();
+      
+      // Only platform admin can write
+      allow create, update, delete: if isPlatformAdmin();
+    }
+    
+    // ============================================
+    // ADS
+    // ============================================
+    
+    match /ads/{adId} {
+      // Anyone can read active ads
+      allow read: if isAuthenticated() && resource.data.status == 'active';
+      
+      // Platform admin can read all
+      allow read: if isPlatformAdmin();
+      
+      // Only platform admin can write
+      allow create, update, delete: if isPlatformAdmin();
+    }
+    
+    // ============================================
+    // WITHDRAWAL REQUESTS
+    // ============================================
+    
+    match /withdrawal_requests/{requestId} {
+      // Platform admin can read all
+      allow read: if isPlatformAdmin();
+      
+      // Pesantren admin can read their own requests
+      allow read: if isPesantrenAdmin() && 
+        resource.data.tenantId == getUserData().tenantId;
+      
+      // Pesantren admin can create withdrawal request
+      allow create: if isPesantrenAdmin();
+      
+      // Only platform admin can update status
+      allow update: if isPlatformAdmin();
+      
+      // No deletion allowed
+      allow delete: if false;
+    }
+    
+    // ============================================
+    // DEFAULT DENY ALL OTHER COLLECTIONS
+    // ============================================
+    
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,92 @@
+<!-- Header dengan Filter Tanggal dan Tombol Aksi -->
+<div class="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 hidden md:block">Laporan & Analitik</h1>
+    <div class="flex items-center gap-4">
+        <!-- Filter Periode -->
+        <div class="flex items-center gap-2">
+            <label for="report-period" class="font-semibold text-sm flex-shrink-0">Periode:</label>
+            <select id="report-period" class="bg-white p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <option value="today">Hari Ini</option>
+                <option value="last7days">7 Hari Terakhir</option>
+                <option value="this_month">Bulan Ini</option>
+                <option value="all" selected>Semua Waktu</option>
+            </select>
+        </div>
+        <!-- Tombol Aksi -->
+        <div class="flex items-center gap-2">
+             <button id="btn-print-report" class="bg-gray-600 text-white p-2 rounded-lg font-semibold hover:bg-gray-700 transition-colors">Cetak</button>
+             <button id="btn-export-csv" class="bg-green-600 text-white p-2 rounded-lg font-semibold hover:bg-green-700 transition-colors">Ekspor CSV</button>
+        </div>
+    </div>
+</div>
+
+<!-- Ringkasan Keuangan -->
+<div class="mb-8">
+    <h2 id="financial-summary-title" class="text-xl font-bold text-gray-700 mb-4">Ringkasan Keuangan</h2>
+    <!-- PERUBAHAN: Menambahkan skeleton loader pada ringkasan keuangan -->
+    <div id="financial-summary-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 animate-pulse">
+        <div class="bg-gray-200 p-5 rounded-lg shadow-lg col-span-1 lg:col-span-1">
+            <div class="skeleton h-5 w-2/3 mb-3"></div>
+            <div class="skeleton h-8 w-1/2"></div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md col-span-1">
+            <div class="skeleton h-4 w-3/4 mb-3"></div>
+            <div class="skeleton h-6 w-1/2"></div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md col-span-1">
+            <div class="skeleton h-4 w-3/4 mb-3"></div>
+            <div class="skeleton h-6 w-1/2"></div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md col-span-1">
+            <div class="skeleton h-4 w-2/3 mb-3"></div>
+            <div class="skeleton h-6 w-1/2"></div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md col-span-1">
+            <div class="skeleton h-4 w-3/4 mb-3"></div>
+            <div class="skeleton h-6 w-1/2"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Visualisasi Data dalam Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-8 space-y-8 lg:space-y-0">
+    <!-- Grafik Pendapatan (Bar Chart) -->
+    <div class="lg:col-span-3">
+        <h2 class="text-xl font-bold text-gray-700 mb-4">Grafik Tren Pendapatan</h2>
+        <div class="bg-white p-4 rounded-lg shadow-md h-full flex items-center justify-center">
+            <canvas id="salesChart"></canvas>
+        </div>
+    </div>
+    <!-- Komposisi Penjualan (Pie Chart) -->
+    <div class="lg:col-span-2">
+        <h2 class="text-xl font-bold text-gray-700 mb-4">Komposisi Penjualan</h2>
+        <div class="bg-white p-4 rounded-lg shadow-md h-full flex items-center justify-center">
+            <canvas id="categorySalesChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Analitik Produk -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+    <div>
+        <h2 class="text-xl font-bold text-gray-700 mb-4">Produk Terlaris</h2>
+        <div id="best-sellers-list" class="bg-white p-4 rounded-lg shadow-md space-y-3 min-h-[200px]">
+             <!-- PERUBAHAN: Skeleton loader untuk produk terlaris -->
+             <div class="animate-pulse space-y-3">
+                <div class="flex justify-between items-center p-2"><div class="flex items-center w-3/4"><div class="skeleton w-10 h-10 rounded-md mr-3"></div><div class="skeleton skeleton-text w-1/2"></div></div><div class="skeleton skeleton-text w-1/4"></div></div>
+                <div class="flex justify-between items-center p-2"><div class="flex items-center w-3/4"><div class="skeleton w-10 h-10 rounded-md mr-3"></div><div class="skeleton skeleton-text w-2/3"></div></div><div class="skeleton skeleton-text w-1/4"></div></div>
+                <div class="flex justify-between items-center p-2"><div class="flex items-center w-3/4"><div class="skeleton w-10 h-10 rounded-md mr-3"></div><div class="skeleton skeleton-text w-1/2"></div></div><div class="skeleton skeleton-text w-1/4"></div></div>
+             </div>
+        </div>
+    </div>
+    <div class="mt-8 lg:mt-0">
+        <h2 class="text-xl font-bold text-gray-700 mb-4">Peringatan Stok Menipis</h2>
+        <div id="low-stock-list" class="bg-white p-4 rounded-lg shadow-md space-y-3 min-h-[200px]">
+             <!-- PERUBAHAN: Skeleton loader untuk stok menipis -->
+             <div class="animate-pulse space-y-3">
+                <div class="flex justify-between items-center p-2"><div class="flex items-center w-3/4"><div class="skeleton w-10 h-10 rounded-md mr-3"></div><div class="skeleton skeleton-text w-1/2"></div></div><div class="skeleton skeleton-text w-1/4"></div></div>
+                <div class="flex justify-between items-center p-2"><div class="flex items-center w-3/4"><div class="skeleton w-10 h-10 rounded-md mr-3"></div><div class="skeleton skeleton-text w-2/3"></div></div><div class="skeleton skeleton-text w-1/4"></div></div>
+             </div>
+        </div>
+    </div>
+</div>

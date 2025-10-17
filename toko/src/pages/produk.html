@@ -1,0 +1,200 @@
+<!-- Header Halaman -->
+<div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+    <h1 class="text-3xl font-bold text-gray-800 hidden md:block">Manajemen Produk</h1>
+    <!-- Grup Tombol dan Pencarian -->
+    <div class="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+        <input type="text" id="product-search-management" placeholder="Cari produk, SKU, atau Barcode..." class="w-full sm:w-auto p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        
+        <button id="btn-open-filter" class="w-full sm:w-auto bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex-shrink-0 flex items-center justify-center relative">
+            <svg xmlns="http://www.w.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            Filter & Urutkan
+            <span id="filter-active-indicator" class="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-blue-600 hidden"></span>
+        </button>
+
+        <button id="btn-add-product" class="w-full sm:w-auto bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex-shrink-0">
+            Tambah Produk
+        </button>
+    </div>
+</div>
+
+<!-- Tabel Produk -->
+<div class="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
+     <table class="w-full text-left min-w-[800px]">
+        <thead class="border-b">
+            <tr>
+                <th class="p-4">Produk</th>
+                <th class="p-4">SKU / Barcode</th>
+                <th class="p-4">Kategori</th>
+                <th class="p-4">Harga Beli</th>
+                <th class="p-4">Harga Jual</th>
+                <th class="p-4">Stok</th>
+                <th class="p-4">Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="product-management-list">
+            <!-- Skeleton Loader -->
+            <tr>
+                <td colspan="7" class="p-4">
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-7 gap-4">
+                            <div class="h-10 bg-gray-200 rounded col-span-2 skeleton-loader"></div>
+                            <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                            <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                            <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                            <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                            <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                        </div>
+                         <div class="grid grid-cols-7 gap-4">
+                            <div class="h-10 bg-gray-200 rounded col-span-2 skeleton-loader"></div>
+                            <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                            <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                            <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                            <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                             <div class="h-10 bg-gray-200 rounded col-span-1 skeleton-loader"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Kontrol Paginasi -->
+<div id="pagination-controls" class="flex justify-between items-center mt-6"></div>
+
+
+<!-- Modal Tambah/Edit Produk -->
+<div id="product-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50"></div>
+    <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-lg w-full p-6 relative transform transition-all scale-95 opacity-0">
+        <h3 id="product-modal-title" class="text-2xl font-bold mb-6">Tambah Produk Baru</h3>
+        <form id="product-form">
+            <input type="hidden" id="product-id">
+            <div class="space-y-4">
+                <div>
+                    <label for="product-name" class="block font-semibold mb-1">Nama Produk</label>
+                    <input type="text" id="product-name" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="product-sku" class="block font-semibold mb-1">SKU <span class="text-gray-400 font-normal">(Opsional)</span></label>
+                        <input type="text" id="product-sku" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Contoh: MR-001">
+                    </div>
+                    <div>
+                        <label for="product-barcode" class="block font-semibold mb-1">Barcode <span class="text-gray-400 font-normal">(Opsional)</span></label>
+                        <input type="text" id="product-barcode" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Scan atau ketik">
+                        <!-- PERUBAHAN: Menambah elemen untuk feedback -->
+                        <div id="barcode-feedback" class="text-xs mt-1 h-4"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="product-category" class="block font-semibold mb-1">Kategori</label>
+                    <select id="product-category" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white" required></select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="product-cost-price" class="block font-semibold mb-1">Harga Beli (Modal)</label>
+                        <input type="number" id="product-cost-price" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label for="product-price" class="block font-semibold mb-1">Harga Jual</label>
+                        <input type="number" id="product-price" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                    </div>
+                </div>
+                 <div>
+                    <label for="product-stock" class="block font-semibold mb-1">Stok Awal</label>
+                    <input type="number" id="product-stock" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Gambar Produk</label>
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                        <div id="image-upload-container" class="space-y-1 text-center">
+                            <div id="image-preview-wrapper" class="hidden relative w-32 h-32 mx-auto">
+                                <img id="image-preview" src="#" class="w-full h-full object-cover rounded-md">
+                                <button type="button" id="remove-image-btn" class="absolute top-0 right-0 -mt-2 -mr-2 bg-red-500 text-white rounded-full p-1 leading-none hover:bg-red-600">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                </button>
+                            </div>
+                            <div id="upload-prompt" class="text-center">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <div class="flex text-sm text-gray-600 justify-center">
+                                    <label for="product-image-file" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                        <span>Unggah file</span>
+                                        <input id="product-image-file" name="product-image-file" type="file" class="sr-only" accept="image/*">
+                                    </label>
+                                </div>
+                                <p class="text-xs text-gray-500">PNG, JPG, GIF hingga 1MB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="mt-6 flex justify-end space-x-3">
+                <button type="button" id="btn-cancel-product" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Filter & Urutkan -->
+<div id="product-filter-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50"></div>
+    <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-lg w-full p-6 relative transform transition-all scale-95 opacity-0">
+        <h3 class="text-2xl font-bold mb-6">Filter & Urutkan Produk</h3>
+        <form id="product-filter-form">
+            <div class="space-y-6">
+                <!-- Urutkan -->
+                <div>
+                    <label for="filter-sort-by" class="block font-semibold mb-2 text-gray-700">Urutkan Berdasarkan</label>
+                    <select id="filter-sort-by" class="w-full p-2 border rounded-md bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <option value="default">Default</option>
+                        <option value="price_asc">Harga Jual (Termurah)</option>
+                        <option value="price_desc">Harga Jual (Termahal)</option>
+                        <option value="cost_asc">Harga Beli (Termurah)</option>
+                        <option value="cost_desc">Harga Beli (Termahal)</option>
+                        <option value="stock_asc">Stok (Menipis)</option>
+                        <option value="stock_desc">Stok (Terbanyak)</option>
+                    </select>
+                </div>
+                <!-- Filter -->
+                <div>
+                    <p class="block font-semibold mb-2 text-gray-700">Filter Berdasarkan</p>
+                    <div class="space-y-4 p-4 border rounded-md">
+                        <div>
+                            <label for="filter-category" class="block text-sm font-medium mb-1">Kategori</label>
+                            <select id="filter-category" class="w-full p-2 border rounded-md bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <!-- Opsi kategori diisi oleh JS -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="flex items-center space-x-2 cursor-pointer text-sm">
+                                <input type="checkbox" id="filter-no-image" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span>Hanya tampilkan produk tanpa gambar</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer text-sm mt-2">
+                                <input type="checkbox" id="filter-no-cost-price" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span>Hanya tampilkan produk tanpa harga modal</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tombol Aksi -->
+            <div class="mt-8 flex justify-between items-center">
+                <button type="button" id="btn-reset-filter" class="text-sm font-semibold text-gray-600 hover:text-red-600">Reset Filter</button>
+                <div class="space-x-3">
+                    <button type="button" id="btn-cancel-filter" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                    <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Terapkan</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

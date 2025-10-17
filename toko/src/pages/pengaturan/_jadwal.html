@@ -1,0 +1,46 @@
+<h2 class="text-xl font-bold text-gray-700 border-b pb-4">Jadwal Buka Toko</h2>
+<p class="text-sm text-gray-500 mt-2 mb-6">Jadwal ini akan ditampilkan di aplikasi wali santri untuk memberitahu kapan toko buka atau tutup.</p>
+<form id="schedule-settings-form" class="mt-6 space-y-4">
+    <!-- Header Jadwal (hanya terlihat di layar besar) -->
+    <div class="hidden md:flex items-center font-semibold text-gray-500 text-sm px-2">
+        <span class="w-1/4">Hari</span>
+        <span class="w-3/4 grid grid-cols-2 gap-2">
+            <span>Jam Buka</span>
+            <span>Jam Tutup</span>
+        </span>
+    </div>
+
+    <!-- Jadwal per Hari (kontainer) -->
+    <div id="schedule-container" class="space-y-4 md:space-y-2">
+        <!-- PERUBAHAN: Skeleton loader untuk daftar jadwal -->
+        <div class="animate-pulse space-y-2">
+            <!-- Skeleton Row 1 -->
+            <div class="grid grid-cols-3 md:grid-cols-4 items-center gap-4 py-3 border-b">
+                <div class="flex items-center space-x-3 col-span-2 md:col-span-1">
+                    <div class="skeleton w-10 h-6 rounded-full"></div>
+                    <div class="skeleton skeleton-text w-16"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 col-span-2 md:col-span-3">
+                    <div class="skeleton h-10 w-full"></div>
+                    <div class="skeleton h-10 w-full"></div>
+                </div>
+            </div>
+            <!-- Skeleton Row 2 -->
+            <div class="grid grid-cols-3 md:grid-cols-4 items-center gap-4 py-3 border-b">
+                <div class="flex items-center space-x-3 col-span-2 md:col-span-1">
+                    <div class="skeleton w-10 h-6 rounded-full"></div>
+                    <div class="skeleton skeleton-text w-16"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 col-span-2 md:col-span-3">
+                    <div class="skeleton h-10 w-full"></div>
+                    <div class="skeleton h-10 w-full"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tombol Simpan -->
+    <div class="pt-4">
+        <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-700">Simpan Jadwal</button>
+    </div>
+</form>

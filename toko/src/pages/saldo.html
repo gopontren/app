@@ -1,0 +1,102 @@
+<h1 class="text-3xl font-bold text-gray-800 mb-6 hidden md:block">Saldo E-Wallet</h1>
+
+<!-- Ringkasan Saldo -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-gray-500">Saldo Dapat Ditarik</h3>
+        <!-- PERUBAHAN: Skeleton loader untuk saldo -->
+        <div id="saldo-tersedia" class="text-3xl font-bold text-green-600 mt-2">
+            <div class="skeleton skeleton-text w-3/4 h-8"></div>
+        </div>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-gray-500">Saldo Pending (Tertahan)</h3>
+        <!-- PERUBAHAN: Skeleton loader untuk saldo -->
+        <div id="saldo-pending" class="text-3xl font-bold text-yellow-600 mt-2">
+            <div class="skeleton skeleton-text w-1/2 h-8"></div>
+        </div>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-center">
+        <button id="btn-tarik-dana" class="w-full bg-blue-600 text-white p-3 rounded-lg font-bold hover:bg-blue-700 disabled:bg-gray-400 transition-colors" disabled>
+            Tarik Dana
+        </button>
+    </div>
+</div>
+
+<!-- Riwayat Transaksi dengan Tab -->
+<div class="bg-white rounded-lg shadow-md">
+    <!-- Header dengan Filter dan Judul -->
+    <div class="flex flex-col sm:flex-row justify-between sm:items-center p-4 border-b border-gray-200 gap-4">
+        <h2 class="text-xl font-bold text-gray-700">Riwayat Transaksi</h2>
+        <div class="flex items-center gap-2">
+            <label for="history-period" class="font-semibold text-sm flex-shrink-0">Periode:</label>
+            <select id="history-period" class="bg-white p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <option value="last7days" selected>7 Hari Terakhir</option>
+                <option value="this_month">Bulan Ini</option>
+                <option value="all">Semua Waktu</option>
+            </select>
+        </div>
+    </div>
+    
+    <!-- Navigasi Tab -->
+    <div class="border-b border-gray-200">
+        <nav id="history-tabs" class="flex -mb-px space-x-1 px-4">
+            <button data-tab="pendapatan" class="history-tab-btn flex-shrink-0 relative py-3 px-4 font-semibold text-blue-600 border-b-2 border-blue-600">
+                Riwayat Pendapatan
+            </button>
+            <button data-tab="penarikan" class="history-tab-btn flex-shrink-0 relative py-3 px-4 font-semibold text-gray-500 hover:text-blue-600 border-b-2 border-transparent">
+                Riwayat Penarikan
+            </button>
+        </nav>
+    </div>
+
+    <!-- Konten Tabel Riwayat (Dinamis) -->
+    <div class="p-4 overflow-x-auto">
+         <table class="w-full text-left min-w-[500px]">
+            <thead id="history-table-head">
+                <!-- Header tabel akan diisi oleh JS -->
+            </thead>
+            <tbody id="history-table-body">
+                <!-- PERUBAHAN: Skeleton loader untuk tabel riwayat -->
+                <tr class="animate-pulse">
+                    <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                    <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                    <td class="p-4"><div class="skeleton skeleton-text w-1/2 ml-auto"></div></td>
+                </tr>
+                <tr class="animate-pulse">
+                    <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                    <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                    <td class="p-4"><div class="skeleton skeleton-text w-1/2 ml-auto"></div></td>
+                </tr>
+                <tr class="animate-pulse">
+                    <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                    <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                    <td class="p-4"><div class="skeleton skeleton-text w-1/2 ml-auto"></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal Tarik Dana -->
+<div id="tarik-dana-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50"></div>
+    <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-md w-full p-6 relative transform transition-all scale-95 opacity-0">
+        <h3 class="text-2xl font-bold mb-4">Buat Permintaan Penarikan Dana</h3>
+        <p class="text-gray-600 mb-6">Saldo yang dapat ditarik: <strong id="modal-saldo-tersedia" class="text-gray-800"></strong></p>
+        <form id="tarik-dana-form">
+            <div>
+                <label for="jumlah-penarikan" class="block font-semibold mb-1">Jumlah Penarikan (Rp)</label>
+                <input type="number" id="jumlah-penarikan" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                <div class="flex justify-end mt-2">
+                    <button type="button" id="btn-tarik-semua" class="text-sm text-blue-600 hover:underline">Tarik semua saldo</button>
+                </div>
+            </div>
+             <div class="mt-6 flex justify-end space-x-3">
+                <button type="button" id="btn-batal-tarik" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Ajukan Penarikan</button>
+            </div>
+        </form>
+    </div>
+</div>

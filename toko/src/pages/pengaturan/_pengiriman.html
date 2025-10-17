@@ -1,0 +1,48 @@
+<h2 class="text-xl font-bold text-gray-700 border-b pb-4 mb-6">Layanan Pengiriman Online</h2>
+<form id="delivery-settings-form" class="mt-6 space-y-6 max-w-lg">
+    <!-- Opsi Ambil di Tempat -->
+    <div>
+        <label class="flex items-center justify-between cursor-pointer">
+            <span class="font-semibold text-gray-700">Aktifkan "Ambil di Tempat"</span>
+            <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input type="checkbox" name="ambil_ditempat" id="toggle-ambil-ditempat" class="toggle-checkbox absolute block w-7 h-7 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                <label for="toggle-ambil-ditempat" class="toggle-label block overflow-hidden h-7 rounded-full bg-gray-300 cursor-pointer"></label>
+            </div>
+        </label>
+        <p class="text-sm text-gray-500 mt-1">Pelanggan dapat mengambil pesanan langsung di lokasi toko Anda.</p>
+    </div>
+
+    <!-- Opsi Pengiriman Toko -->
+    <div>
+        <label class="flex items-center justify-between cursor-pointer">
+            <span class="font-semibold text-gray-700">Aktifkan "Pengiriman Toko"</span>
+            <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input type="checkbox" name="pengiriman_toko" id="toggle-pengiriman-toko" class="toggle-checkbox absolute block w-7 h-7 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                <label for="toggle-pengiriman-toko" class="toggle-label block overflow-hidden h-7 rounded-full bg-gray-300 cursor-pointer"></label>
+            </div>
+        </label>
+         <p class="text-sm text-gray-500 mt-1">Anda akan menangani pengiriman sendiri menggunakan kurir internal toko.</p>
+    </div>
+    
+    <!-- PENAMBAHAN BARU: Opsi Jasa Pengiriman -->
+    <div class="border-t pt-6">
+        <label class="flex items-center justify-between cursor-pointer">
+            <span class="font-semibold text-gray-700">Aktifkan "Gunakan Jasa Pengiriman"</span>
+            <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input type="checkbox" name="jasa_pengiriman" id="toggle-jasa-pengiriman" class="toggle-checkbox absolute block w-7 h-7 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                <label for="toggle-jasa-pengiriman" class="toggle-label block overflow-hidden h-7 rounded-full bg-gray-300 cursor-pointer"></label>
+            </div>
+        </label>
+        <p class="text-sm text-gray-500 mt-1">Layanan Pengambilan Barang Ini Disediakan Oleh Pesantren</p>
+        
+        <!-- Kontainer untuk Daftar Kurir (muncul saat toggle aktif) -->
+        <div id="courier-list-container" class="mt-4 pl-6 border-l-2 border-gray-200 space-y-3 hidden">
+            <!-- Daftar kurir akan dirender di sini oleh JS -->
+            <p class="text-sm text-gray-500">Memuat daftar kurir...</p>
+        </div>
+    </div>
+
+    <div class="pt-4">
+        <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-700">Simpan Pengaturan Layanan</button>
+    </div>
+</form>

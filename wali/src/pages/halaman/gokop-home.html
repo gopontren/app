@@ -1,0 +1,79 @@
+<!-- Halaman Utama Go-Kop E-Commerce -->
+<div class="bg-white">
+    <!-- Header Tetap (Sticky) -->
+    <div class="sticky top-0 bg-white/90 backdrop-blur-lg z-20 px-4 pt-4 pb-3 shadow-sm">
+        <!-- Baris Atas: Navigasi & Keranjang -->
+        <div class="flex items-center justify-between mb-3">
+            <a href="#home" class="p-2 -ml-2 text-slate-500 hover:text-emerald-600">
+                <i data-lucide="arrow-left" class="w-6 h-6"></i>
+            </a>
+            <h1 class="text-lg font-bold text-slate-800">Belanja Kebutuhan Santri</h1>
+            <a href="#keranjang" class="p-2 -mr-2 relative text-slate-600 hover:text-emerald-600">
+                <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                <span id="cart-item-count-badge" class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center hidden">0</span>
+            </a>
+        </div>
+
+        <!-- Banner Promosi Dinamis -->
+        <div id="gokop-promo-banner-container">
+            <!-- Skeleton loader untuk banner -->
+            <div class="w-full h-24 bg-slate-200 rounded-2xl animate-pulse"></div>
+        </div>
+    </div>
+
+    <!-- Konten Scrollable -->
+    <div class="p-4 pb-28">
+        <!-- Judul dan tombol Hapus -->
+        <div class="flex justify-between items-center mb-4">
+            <h2 id="product-list-title" class="text-xl font-bold text-slate-800">Semua Produk</h2>
+            <button id="clear-search-btn" class="hidden text-sm font-semibold text-emerald-600 hover:text-emerald-800 flex items-center transition-all">
+                <i data-lucide="x-circle" class="w-4 h-4 mr-1"></i>
+                Hapus Filter
+            </button>
+        </div>
+
+        <!-- Grid Produk -->
+        <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <!-- Konten akan diisi oleh JS menggunakan template di bawah -->
+        </div>
+        
+        <!-- Indikator Loading untuk Infinite Scroll -->
+        <div id="product-loader" class="col-span-full text-center p-6 hidden">
+            <div class="flex justify-center items-center space-x-2 text-slate-500">
+                <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="font-semibold text-sm">Memuat produk berikutnya...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Template untuk satu kartu produk -->
+<template id="product-card-template">
+    <a href="#" class="product-card-link block bg-white rounded-2xl shadow-md shadow-slate-200/50 overflow-hidden group hover:shadow-lg transition-shadow duration-300">
+        <div class="overflow-hidden">
+            <!-- [PERUBAHAN] Menambahkan loading="lazy" -->
+            <img src="" alt="" class="product-image w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
+        <div class="p-3">
+            <p class="product-store text-xs text-slate-500"></p>
+            <h3 class="product-name font-bold text-sm text-slate-800 truncate mt-1"></h3>
+            <p class="product-price font-semibold text-emerald-600 mt-2"></p>
+        </div>
+    </a>
+</template>
+
+<!-- Modal Pencarian -->
+<div id="search-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden items-start justify-center pt-20 px-4">
+    <div id="search-modal-content" class="w-full max-w-md bg-white rounded-2xl shadow-xl p-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
+        <div class="relative">
+            <input type="text" id="product-search-input" placeholder="Cari sabun, buku, atau snack..." class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-full bg-white focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition">
+            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                <i data-lucide="search" class="w-5 h-5"></i>
+            </div>
+        </div>
+         <button id="close-search-modal-btn" class="w-full mt-3 text-center text-slate-500 font-semibold py-2">Tutup</button>
+    </div>
+</div>

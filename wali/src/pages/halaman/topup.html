@@ -1,0 +1,54 @@
+<!-- Halaman Pilih Nominal Top-Up -->
+<div class="flex flex-col h-full bg-slate-50">
+    <!-- Header Tetap -->
+    <div class="sticky top-0 bg-white/80 backdrop-blur-lg z-20 px-4 py-3 shadow-sm border-b">
+        <div class="flex items-center">
+            <a href="#home" id="back-button" class="p-2 -ml-2 text-slate-500 hover:text-emerald-600">
+                <i data-lucide="arrow-left" class="w-6 h-6"></i>
+            </a>
+            <h1 class="text-lg font-bold text-slate-800 ml-2">Isi Saldo Saku Santri</h1>
+        </div>
+    </div>
+
+    <!-- Konten Utama -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-4">
+        <!-- Info Saldo Saat Ini -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm">
+            <p id="topup-santri-name" class="font-bold text-slate-800">Memuat nama santri...</p>
+            <div class="flex justify-between items-center mt-1">
+                <span class="text-sm text-slate-500">Saldo saat ini</span>
+                <span id="current-balance" class="font-semibold text-sky-600">Rp 0</span>
+            </div>
+        </div>
+        
+        <!-- Pilihan Nominal Cepat -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm">
+            <h2 class="font-bold text-slate-800 mb-3">Pilih Nominal Top-Up</h2>
+            <div id="nominal-options" class="grid grid-cols-3 gap-3">
+                <button data-amount="25000" class="nominal-btn border-2 border-slate-200 rounded-xl p-3 text-center font-bold text-slate-700 hover:border-emerald-500 hover:bg-emerald-50 transition">Rp 25.000</button>
+                <button data-amount="50000" class="nominal-btn border-2 border-slate-200 rounded-xl p-3 text-center font-bold text-slate-700 hover:border-emerald-500 hover:bg-emerald-50 transition">Rp 50.000</button>
+                <button data-amount="100000" class="nominal-btn border-2 border-slate-200 rounded-xl p-3 text-center font-bold text-slate-700 hover:border-emerald-500 hover:bg-emerald-50 transition">Rp 100.000</button>
+                <button data-amount="150000" class="nominal-btn border-2 border-slate-200 rounded-xl p-3 text-center font-bold text-slate-700 hover:border-emerald-500 hover:bg-emerald-50 transition">Rp 150.000</button>
+                <button data-amount="200000" class="nominal-btn border-2 border-slate-200 rounded-xl p-3 text-center font-bold text-slate-700 hover:border-emerald-500 hover:bg-emerald-50 transition">Rp 200.000</button>
+                <button data-amount="250000" class="nominal-btn border-2 border-slate-200 rounded-xl p-3 text-center font-bold text-slate-700 hover:border-emerald-500 hover:bg-emerald-50 transition">Rp 250.000</button>
+            </div>
+        </div>
+
+        <!-- Input Nominal Lain -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm">
+            <label for="custom-amount" class="font-bold text-slate-800 mb-2 block">Atau masukkan nominal lain</label>
+            <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 font-semibold text-slate-500">Rp</span>
+                <input type="number" id="custom-amount" placeholder="Contoh: 75000" class="w-full border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 pl-10 p-3 font-semibold">
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Minimal top-up adalah Rp 10.000.</p>
+        </div>
+    </div>
+
+    <!-- Footer Tetap untuk Aksi -->
+    <div class="sticky bottom-0 bg-white/90 backdrop-blur-lg z-10 p-4 border-t border-slate-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+        <button id="continue-topup-button" class="w-full bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl hover:bg-emerald-700 transition disabled:bg-slate-400 disabled:cursor-not-allowed" disabled>
+            Lanjutkan
+        </button>
+    </div>
+</div>

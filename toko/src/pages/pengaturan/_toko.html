@@ -1,0 +1,33 @@
+<h2 class="text-xl font-bold text-gray-700 border-b pb-4 mb-6">Pengaturan Toko</h2>
+<form id="store-settings-form" class="space-y-6 max-w-lg">
+    <div>
+        <label for="store-name" class="block font-semibold mb-1 text-gray-700">Nama Toko</label>
+        <input type="text" id="store-name" class="w-full p-2 border rounded-md bg-gray-100 cursor-not-allowed" readonly>
+    </div>
+    <div>
+        <label for="store-address" class="block font-semibold mb-1 text-gray-700">Alamat Toko</label>
+        <input type="text" id="store-address" class="w-full p-2 border rounded-md bg-gray-100 cursor-not-allowed" readonly>
+    </div>
+    <div>
+        <label for="store-phone" class="block font-semibold mb-1 text-gray-700">Nomor Telepon</label>
+        <input type="text" id="store-phone" class="w-full p-2 border rounded-md bg-gray-100 cursor-not-allowed" readonly>
+    </div>
+    <div>
+        <label for="store-description" class="block font-semibold mb-1 text-gray-700">Deskripsi Toko</label>
+        <textarea id="store-description" rows="3" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+    </div>
+    
+    <!-- PERUBAHAN DI SINI: Nomor Rekening Dibuat Read-Only dengan Tombol Ubah -->
+     <div>
+        <label class="block font-semibold mb-1 text-gray-700">Nomor Rekening (Untuk Penarikan Dana)</label>
+        <div class="flex items-center gap-4">
+             <p id="store-withdrawal-account-display" class="w-full p-2 bg-gray-100 rounded-md font-mono"></p>
+             <button type="button" id="btn-show-change-account-modal" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 font-semibold transition-colors flex-shrink-0">Ubah</button>
+        </div>
+        <p class="text-xs text-gray-500 mt-1">Pastikan nomor rekening ini valid untuk menerima dana hasil penjualan.</p>
+    </div>
+    
+    <div class="pt-4">
+        <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-700">Simpan Perubahan</button>
+    </div>
+</form>

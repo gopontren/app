@@ -1,0 +1,136 @@
+<!-- Header Halaman -->
+<div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 hidden md:block">Stok Masuk (Pembelian)</h1>
+    <button id="btn-add-purchase" class="bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors w-full sm:w-auto">
+        Catat Pembelian Baru
+    </button>
+</div>
+
+<!-- Tabel Riwayat Pembelian -->
+<div class="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
+     <table class="w-full text-left min-w-[600px]">
+        <thead class="border-b">
+            <tr>
+                <th class="p-4">ID Pembelian</th>
+                <th class="p-4">Tanggal</th>
+                <th class="p-4">Supplier</th>
+                <th class="p-4">Total</th>
+            </tr>
+        </thead>
+        <tbody id="purchase-history-list">
+            <!-- PERUBAHAN: Skeleton Loader untuk riwayat pembelian -->
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+            </tr>
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-3/4"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+            </tr>
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Kontrol Paginasi -->
+<div id="pagination-controls" class="flex justify-between items-center mt-6"></div>
+
+<!-- Modal Tambah Pembelian -->
+<div id="purchase-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50"></div>
+    <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-3xl w-full p-6 relative transform transition-all scale-95 opacity-0 max-h-[90vh] flex flex-col">
+        <h3 class="text-2xl font-bold mb-4">Catat Pembelian Baru</h3>
+        <form id="purchase-form" class="flex-1 flex flex-col overflow-hidden">
+            <!-- Bagian Atas Form -->
+            <div class="mb-4">
+                <label for="purchase-supplier" class="block font-semibold mb-1">Pilih Supplier</label>
+                <select id="purchase-supplier" class="w-full p-2 border rounded-md bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none" required></select>
+            </div>
+
+            <!-- Bagian Pencarian Produk -->
+            <div class="mb-4">
+                 <label for="product-search-purchase" class="block font-semibold mb-1">Cari & Tambah Produk</label>
+                 <div class="flex items-center gap-2">
+                    <input type="text" id="product-search-purchase" class="w-full p-2 border rounded-md" placeholder="Ketik nama produk...">
+                    <button type="button" id="btn-add-new-product-shortcut" class="bg-green-600 text-white py-2 px-3 rounded-lg font-semibold hover:bg-green-700 transition-colors flex-shrink-0" title="Tambah Produk Baru ke Sistem">
+                        + Baru
+                    </button>
+                 </div>
+                 <div id="product-search-results" class="relative"></div>
+            </div>
+
+            <!-- Bagian Daftar Item -->
+            <div class="flex-1 border rounded-md p-2 overflow-y-auto bg-gray-50">
+                <h4 class="font-semibold mb-2 text-gray-600 px-2">Item Pembelian:</h4>
+                <div id="purchase-items-list" class="space-y-2">
+                    <p class="text-center text-gray-500 py-6">Belum ada item ditambahkan.</p>
+                </div>
+            </div>
+
+            <!-- Bagian Bawah: Total & Aksi -->
+            <div class="pt-4 mt-auto">
+                <div class="flex justify-end items-center mb-6">
+                    <span class="text-lg font-semibold">Total Pembelian:</span>
+                    <span id="purchase-total" class="text-2xl font-bold ml-4">Rp 0</span>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="btn-cancel-purchase" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                    <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400" disabled>Simpan Pembelian</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal pintasan untuk menambah produk baru -->
+<div id="product-modal-shortcut" class="fixed inset-0 z-60 items-center justify-center hidden">
+    <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-60"></div>
+    <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-lg w-full p-6 relative transform transition-all scale-95 opacity-0">
+        <h3 id="product-modal-title-shortcut" class="text-2xl font-bold mb-6">Tambah Produk Baru (Pintasan)</h3>
+        <form id="product-form-shortcut">
+            <div class="space-y-4">
+                <div>
+                    <label for="product-name-shortcut" class="block font-semibold mb-1">Nama Produk</label>
+                    <input type="text" id="product-name-shortcut" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                </div>
+                <div>
+                    <label for="product-category-shortcut" class="block font-semibold mb-1">Kategori</label>
+                    <select id="product-category-shortcut" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white" required>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="product-cost-price-shortcut" class="block font-semibold mb-1">Harga Beli (Modal)</label>
+                        <input type="number" id="product-cost-price-shortcut" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label for="product-price-shortcut" class="block font-semibold mb-1">Harga Jual</label>
+                        <input type="number" id="product-price-shortcut" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                    </div>
+                </div>
+                 <div>
+                    <label for="product-stock-shortcut" class="block font-semibold mb-1">Stok Awal</label>
+                    <input type="number" id="product-stock-shortcut" value="0" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                </div>
+                 <div>
+                    <label for="product-image-shortcut" class="block font-semibold mb-1">URL Gambar (Opsional)</label>
+                    <input type="text" id="product-image-shortcut" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="https://placehold.co/...">
+                </div>
+            </div>
+             <div class="mt-6 flex justify-end space-x-3">
+                <button type="button" id="btn-cancel-product-shortcut" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Simpan Produk</button>
+            </div>
+        </form>
+    </div>
+</div>

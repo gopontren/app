@@ -1,0 +1,49 @@
+<!-- 
+  src/pages/bulkScan.html
+  [PEMBARUAN]
+  - Menghapus tombol-tombol simulasi.
+  - Mengganti latar belakang statis dengan div #scanner-viewfinder
+    yang akan menampilkan video dari kamera.
+-->
+<div class="screen bulk-scan-screen">
+    <!-- Overlay untuk semua elemen UI -->
+    <div class="bulk-scan-overlay">
+        <!-- Header -->
+        <div class="flex items-center justify-between text-white">
+            <div>
+                <button data-action="go-back" class="flex items-center gap-2 opacity-80 hover:opacity-100">
+                    <i data-lucide="arrow-left" class="h-6 w-6"></i>
+                    <span class="font-semibold">Kembali</span>
+                </button>
+                <h1 id="bulk-scan-title" class="text-2xl font-bold mt-2">Memuat...</h1>
+            </div>
+            <!-- Counter Santri -->
+            <div id="bulk-scan-counter" class="text-right">
+                <p class="text-4xl font-bold">0</p>
+                <p class="opacity-80 -mt-1">Terpindai</p>
+            </div>
+        </div>
+
+        <!-- [BARU] Jendela Bidik Kamera -->
+        <div class="flex-grow flex items-center justify-center">
+            <div id="scanner-viewfinder" class="w-full aspect-square rounded-2xl bg-slate-900 overflow-hidden relative shadow-inner">
+                <!-- Video kamera akan ditampilkan di sini oleh JS -->
+                 <div class="absolute inset-0 flex items-center justify-center text-white/30">
+                    <p>Mempersiapkan kamera...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tombol Selesai -->
+        <div class="mt-auto text-center pt-4">
+             <button data-action="go-back" class="bg-teal-600 text-white font-semibold py-4 px-12 rounded-full shadow-lg">
+                Selesai
+            </button>
+        </div>
+    </div>
+
+    <!-- Pop-up hasil scan -->
+    <div id="bulk-scan-result-popup">
+        <!-- Konten diisi oleh JS -->
+    </div>
+</div>

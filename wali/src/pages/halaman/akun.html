@@ -1,0 +1,58 @@
+<!-- Latar belakang header, sama seperti Beranda -->
+<div class="relative z-10">
+    <!-- Padding untuk memberi ruang bagi background -->
+    <div class="pt-24 px-4 pb-8">
+        <!-- Info Pengguna -->
+        <div class="text-white relative mb-6 flex flex-col items-center text-center">
+            <div id="user-avatar" class="w-24 h-24 rounded-full mb-4 border-4 border-emerald-400/50 bg-slate-200 text-slate-600 flex items-center justify-center text-4xl font-bold">
+                <!-- Inisial akan diisi oleh JS -->
+            </div>
+            <h2 id="user-name" class="text-2xl font-bold">Nama Pengguna</h2>
+            <p id="user-role" class="text-sm opacity-80">Wali Santri</p>
+        </div>
+
+        <!-- Menu Pengaturan -->
+        <div class="space-y-3">
+             <a href="#pengaturan/profil" class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm hover:bg-slate-50 transition">
+                <div class="flex items-center space-x-4">
+                    <div class="text-slate-500"><i data-lucide="user-cog"></i></div>
+                    <p class="font-semibold text-slate-700">Profil Pengguna</p>
+                </div>
+                <div class="text-slate-400"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+            <!-- == PENAMBAHAN BARU DI SINI == -->
+            <a href="#riwayat/pesanan" class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm hover:bg-slate-50 transition">
+                <div class="flex items-center space-x-4">
+                    <div class="text-slate-500"><i data-lucide="package-check"></i></div>
+                    <p class="font-semibold text-slate-700">Pesanan Saya</p>
+                </div>
+                <div class="text-slate-400"><i data-lucide="chevron-right"></i></div>
+            </a>
+            <!-- ============================== -->
+
+            <a href="#pengaturan/keamanan" class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm hover:bg-slate-50 transition">
+                <div class="flex items-center space-x-4">
+                    <div class="text-slate-500"><i data-lucide="shield"></i></div>
+                    <p class="font-semibold text-slate-700">Keamanan Akun</p>
+                </div>
+                <div class="text-slate-400"><i data-lucide="chevron-right"></i></div>
+            </a>
+            <a href="#pengaturan/bantuan" class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm hover:bg-slate-50 transition">
+                <div class="flex items-center space-x-4">
+                    <div class="text-slate-500"><i data-lucide="help-circle"></i></div>
+                    <p class="font-semibold text-slate-700">Pusat Bantuan</p>
+                </div>
+                <div class="text-slate-400"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+            <!-- Tombol Logout -->
+            <div class="pt-4">
+                 <a href="#" id="logout-button" class="bg-red-50 text-red-600 rounded-2xl p-4 flex items-center justify-center space-x-3 shadow-sm hover:bg-red-100 transition">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                    <p class="font-bold">Keluar</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

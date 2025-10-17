@@ -1,0 +1,36 @@
+<div class="flex flex-col md:flex-row gap-8">
+    <aside class="md:w-1/4 lg:w-1/5 flex-shrink-0">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Pengaturan</h2>
+        <nav id="settings-nav" class="space-y-1">
+            <a href="#/pengaturan?section=profile" data-section="profile" class="settings-nav-item flex items-center p-3 rounded-lg font-semibold text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors">
+                Profil
+            </a>
+            <a href="#/pengaturan?section=store" data-section="store" class="settings-nav-item flex items-center p-3 rounded-lg font-semibold text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors">
+                Toko
+            </a>
+            <a href="#/pengaturan?section=delivery" data-section="delivery" class="settings-nav-item flex items-center p-3 rounded-lg font-semibold text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors">
+                Pengiriman
+            </a>
+            <a href="#/pengaturan?section=schedule" data-section="schedule" class="settings-nav-item flex items-center p-3 rounded-lg font-semibold text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors">
+                Jadwal
+            </a>
+            <a href="#/pengaturan?section=security" data-section="security" class="settings-nav-item flex items-center p-3 rounded-lg font-semibold text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors">
+                Keamanan
+            </a>
+        </nav>
+    </aside>
+
+    <div id="settings-content" class="flex-1 bg-white p-6 rounded-lg shadow-md">
+        <!-- PERUBAHAN: Skeleton loader untuk konten pengaturan -->
+        <div class="animate-pulse">
+            <div class="skeleton h-8 w-1/3 mb-6"></div>
+            <div class="skeleton h-4 w-full mb-2"></div>
+            <div class="skeleton h-4 w-2/3 mb-8"></div>
+            <div class="space-y-6">
+                <div class="skeleton h-10 w-full"></div>
+                <div class="skeleton h-10 w-full"></div>
+                <div class="skeleton h-10 w-1/2"></div>
+            </div>
+        </div>
+    </div>
+</div>

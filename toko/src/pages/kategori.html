@@ -1,0 +1,53 @@
+<!-- Header Halaman -->
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 hidden md:block">Manajemen Kategori</h1>
+    <button id="btn-add-category" class="bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+        Tambah Kategori
+    </button>
+</div>
+
+<!-- Tabel Kategori -->
+<div class="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
+     <table class="w-full text-left">
+        <thead class="border-b">
+            <tr>
+                <th class="p-4">Nama Kategori</th>
+                <th class="p-4">Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="category-list">
+            <!-- PERUBAHAN: Skeleton Loader untuk tabel kategori -->
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-1/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-24"></div></td>
+            </tr>
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-24"></div></td>
+            </tr>
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-2/5"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-24"></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Tambah/Edit Kategori -->
+<div id="category-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50"></div>
+    <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-lg w-full p-6 relative transform transition-all scale-95 opacity-0">
+        <h3 id="category-modal-title" class="text-2xl font-bold mb-6">Tambah Kategori Baru</h3>
+        <form id="category-form">
+            <input type="hidden" id="category-id">
+            <div>
+                <label for="category-name" class="block font-semibold mb-1">Nama Kategori</label>
+                <input type="text" id="category-name" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+            </div>
+             <div class="mt-6 flex justify-end space-x-3">
+                <button type="button" id="btn-cancel-category" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>

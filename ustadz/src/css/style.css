@@ -1,0 +1,212 @@
+/**
+ * src/css/style.css
+ * [PERBAIKAN FINAL]
+ * - Menggabungkan SEMUA styling yang diperlukan:
+ * - Styling dasar aplikasi.
+ * - Styling untuk halaman profil baru (tab, FAB, dll.).
+ * - Class helper .no-transition untuk gestur modal.
+ */
+
+:root {
+    --primary-color: #0d9488; /* teal-600 */
+    --primary-dark: #134e4a; /* teal-900 */
+    --bg-light: #f1f5f9;     /* slate-100 */
+    --text-dark: #1e293b;    /* slate-800 */
+    --text-light: #64748b;   /* slate-500 */
+}
+
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+}
+
+/* --- Screen Transitions --- */
+.screen {
+    position: absolute; inset: 0;
+    opacity: 1; transform: translateX(0);
+    transition: opacity 0.3s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--bg-light);
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding-bottom: 8rem; 
+}
+.screen::-webkit-scrollbar { display: none; }
+.screen.exit-left { transform: translateX(-30px); opacity: 0; pointer-events: none; }
+.screen.exit-right { transform: translateX(30px); opacity: 0; pointer-events: none; }
+.screen.enter-left { transform: translateX(-30px); opacity: 0; }
+.screen.enter-right { transform: translateX(30px); opacity: 0; }
+
+/* --- Main Layout: Smart Action Bar --- */
+.smart-action-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    background: linear-gradient(to top, rgba(241,245,249,1) 70%, rgba(241,245,249,0));
+    pointer-events: none;
+    z-index: 10;
+}
+.smart-action-main, .smart-action-secondary {
+    pointer-events: auto;
+    font-weight: 600;
+    transition: all 0.2s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.15);
+    height: 3.5rem; /* h-14 */
+}
+.smart-action-main {
+    flex-grow: 1;
+    background-color: var(--primary-color);
+    color: white;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 1.25rem; /* rounded-xl */
+}
+.smart-action-main:hover { background-color: #0f766e; }
+
+.smart-action-secondary {
+    background-color: #e2e8f0; /* slate-200 */
+    color: var(--text-dark);
+    flex-shrink: 0;
+    border-radius: 1.25rem; /* rounded-xl */
+    width: 3.5rem;  /* w-14 */
+}
+.smart-action-secondary:hover { background-color: #cbd5e1; }
+
+
+/* --- Modals --- */
+.modal-overlay { position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: flex-end; justify-content: center; z-index: 50; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+.modal-overlay.visible { opacity: 1; visibility: visible; }
+.modal-content { background: white; border-radius: 24px 24px 0 0; width: 100%; max-height: 90vh; overflow-y: auto; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.modal-overlay.visible .modal-content { transform: translateY(0); }
+.modal-content.no-transition {
+    transition: none;
+}
+
+/* --- Toast Notifications --- */
+#toast-container { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 1000; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; pointer-events: none; }
+.toast { display: flex; align-items: center; padding: 0.75rem 1.25rem; background-color: var(--text-dark); color: white; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); transform: translateY(-150%); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+.toast.show { transform: translateY(0); }
+.toast.toast-success { background-color: #047857; }
+.toast.toast-error { background-color: #be123c; }
+
+/* --- Bulk Scan Screen --- */
+.bulk-scan-screen { background-color: #1e293b; display: flex; flex-direction: column; }
+.bulk-scan-overlay {
+    position: relative;
+    z-index: 10;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+#bulk-scan-result-popup {
+    position: absolute;
+    top: 7rem;
+    left: 1.5rem; 
+    right: 1.5rem;
+    background-color: white;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transform: translateY(-200%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s, visibility 0.4s;
+    border-left: 5px solid transparent;
+}
+#bulk-scan-result-popup.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* [BARU] Styling untuk notifikasi izin */
+#bulk-scan-result-popup.status-izin {
+    background-color: #fef3c7; /* amber-100 */
+    border-left-color: #f59e0b; /* amber-500 */
+}
+#bulk-scan-result-popup.status-sukses {
+    background-color: #dcfce7; /* green-100 */
+    border-left-color: #22c55e; /* green-500 */
+}
+
+
+/* --- Misc --- */
+.skeleton { background-color: #e2e8f0; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+.pin-dot { width: 1rem; height: 1rem; border-radius: 50%; border: 2px solid #94a3b8; transition: background-color 0.2s, border-color 0.2s; }
+.pin-dot.filled { background-color: var(--primary-color); border-color: var(--primary-color); }
+
+/* Style untuk Banner Slider */
+.banner-carousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.banner-carousel::-webkit-scrollbar {
+    display: none;
+}
+.banner-card {
+    width: 85%;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* --- STYLES UNTUK HALAMAN PROFIL BARU --- */
+.tab-button {
+    padding: 0.75rem 0.25rem;
+    font-weight: 600;
+    color: var(--text-light);
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+.tab-button.active {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fab {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 4rem; /* w-16 */
+    height: 4rem; /* h-16 */
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px -5px rgba(13, 148, 136, 0.4);
+    transition: transform 0.2s ease-out;
+}
+.fab:hover {
+    transform: scale(1.05);
+}

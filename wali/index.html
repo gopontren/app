@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Go-Pontren</title>
+    
+    <!-- Eksternal Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Aplikasi Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg-slate-50">
+
+    <!-- App Container -->
+    <div id="app-container" class="max-w-md mx-auto bg-slate-100 shadow-2xl shadow-slate-300/30 flex flex-col relative overflow-hidden">
+        
+        <div id="app-background" class="absolute top-0 left-0 w-full h-full z-0"></div>
+
+        <!-- [PERUBAHAN DI SINI] -->
+        <header id="main-header" class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-md z-20 p-6 flex justify-between items-center text-white" style="display: none;">
+             <div>
+                <p class="text-base opacity-80">Assalamualaikum,</p>
+                <h1 id="user-greeting-name" class="text-2xl font-bold">Wali Santri</h1>
+            </div>
+            <a href="#notifikasi" id="notification-link" class="relative p-2">
+                <i data-lucide="bell" class="w-6 h-6"></i>
+                <!-- [BARU] Elemen badge notifikasi -->
+                <span id="notification-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full hidden border-2 border-emerald-400"></span>
+            </a>
+        </header>
+
+        <main id="app-content" class="relative z-10 w-full flex-grow"></main>
+
+        <!-- Navigasi Bawah -->
+        <nav id="bottom-nav" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-30">
+            <div class="bg-white/80 backdrop-blur-lg m-4 mb-3 rounded-2xl shadow-2xl shadow-slate-300/40 flex justify-around py-3">
+                <a href="#home" class="nav-link flex flex-col items-center text-emerald-600 w-1/4">
+                    <i data-lucide="home"></i>
+                    <span class="text-xs font-semibold mt-1">Beranda</span>
+                </a>
+                <a href="#riwayat" class="nav-link flex flex-col items-center text-slate-500 hover:text-emerald-600 w-1/4 transition-colors">
+                    <i data-lucide="history"></i>
+                    <span class="text-xs mt-1">Riwayat</span>
+                </a>
+                <a href="#pesan" class="nav-link flex flex-col items-center text-slate-500 hover:text-emerald-600 w-1/4 transition-colors">
+                     <i data-lucide="message-square-text"></i>
+                    <span class="text-xs mt-1">Pesan</span>
+                </a>
+                <a href="#akun" class="nav-link flex flex-col items-center text-slate-500 hover:text-emerald-600 w-1/4 transition-colors">
+                    <i data-lucide="user"></i>
+                    <span class="text-xs mt-1">Akun</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+</body>
+</html>

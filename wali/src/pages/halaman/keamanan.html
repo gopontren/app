@@ -1,0 +1,41 @@
+<section class="p-4">
+    <!-- Header Halaman -->
+    <div class="flex items-center mb-6">
+        <a href="#akun" class="p-2 -ml-2 text-slate-500 hover:text-emerald-600">
+            <i data-lucide="arrow-left" class="w-6 h-6"></i>
+        </a>
+        <h2 class="text-lg font-bold text-slate-800 ml-2">Keamanan Akun</h2>
+    </div>
+
+    <!-- Form Ubah Kata Sandi -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm">
+        <form id="keamanan-form" class="space-y-4">
+            <div>
+                <label for="pass-lama" class="block text-sm font-medium text-slate-700 mb-1">Kata Sandi Lama</label>
+                <input type="password" id="pass-lama" class="w-full border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500" required>
+            </div>
+            <div>
+                <label for="pass-baru" class="block text-sm font-medium text-slate-700 mb-1">Kata Sandi Baru</label>
+                <input type="password" id="pass-baru" class="w-full border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500" required>
+            </div>
+            <div>
+                <label for="konfirmasi-pass" class="block text-sm font-medium text-slate-700 mb-1">Konfirmasi Kata Sandi Baru</label>
+                <input type="password" id="konfirmasi-pass" class="w-full border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500" required>
+            </div>
+            <div class="pt-2">
+                <button type="submit" class="w-full bg-emerald-500 text-white font-bold py-3 rounded-xl hover:bg-emerald-600 transition">
+                    Ubah Kata Sandi
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Opsi Hapus Akun -->
+    <div class="mt-8">
+        <button id="hapus-akun-btn" class="w-full bg-red-50 text-red-600 rounded-2xl p-4 flex items-center justify-center space-x-3 shadow-sm hover:bg-red-100 transition">
+            <i data-lucide="trash-2" class="w-5 h-5"></i>
+            <span class="font-bold">Hapus Akun</span>
+        </button>
+        <p class="text-xs text-slate-400 text-center mt-2 px-4">Tindakan ini tidak dapat diurungkan. Seluruh data Anda akan dihapus secara permanen.</p>
+    </div>
+</section>

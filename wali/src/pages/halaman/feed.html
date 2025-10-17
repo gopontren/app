@@ -1,0 +1,44 @@
+<section class="p-4">
+    <!-- Header Halaman -->
+    <div class="flex items-center mb-4">
+        <a href="#home" class="p-2 -ml-2 text-slate-500 hover:text-emerald-600">
+            <i data-lucide="arrow-left" class="w-6 h-6"></i>
+        </a>
+        <h2 class="text-lg font-bold text-slate-800 ml-2">Go-Ngaji: Artikel & Video</h2>
+    </div>
+
+    <!-- Kontainer untuk Feed Konten -->
+    <div id="go-ngaji-feed-container" class="space-y-4">
+        <!-- Skeleton loader -->
+        <div class="bg-white rounded-2xl shadow-sm animate-pulse overflow-hidden">
+            <div class="w-full h-40 bg-slate-200"></div>
+            <div class="p-4 space-y-3">
+                <div class="h-3 bg-slate-200 rounded w-1/4"></div>
+                <div class="h-4 bg-slate-200 rounded w-3/4"></div>
+                <div class="h-3 bg-slate-200 rounded w-1/2"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- [BARU] TEMPLATE UNTUK SATU KARTU KONTEN GO-NGAJI -->
+<template id="feed-item-template">
+    <a href="#" class="feed-item-link block bg-white rounded-2xl shadow-md shadow-slate-200/50 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <div class="relative">
+            <!-- [PERFORMA] Menambahkan loading="lazy" -->
+            <img src="" alt="" class="feed-item-thumbnail w-full h-40 object-cover" loading="lazy">
+            <div class="feed-item-video-overlay absolute inset-0 bg-black/30 flex items-center justify-center hidden">
+                <i data-lucide="play-circle" class="w-16 h-16 text-white/80"></i>
+            </div>
+            <span class="feed-item-duration absolute bottom-2 right-2 bg-black/60 text-white text-xs font-semibold py-1 px-2 rounded-md hidden"></span>
+        </div>
+        <div class="p-4">
+            <p class="feed-item-category text-sm font-semibold mb-1"></p>
+            <h3 class="feed-item-title font-bold text-lg text-slate-800 mb-2 leading-tight"></h3>
+            <div class="flex items-center text-sm text-slate-500">
+                <i data-lucide="user-check" class="w-4 h-4 mr-2"></i>
+                <span class="feed-item-author"></span>
+            </div>
+        </div>
+    </a>
+</template>

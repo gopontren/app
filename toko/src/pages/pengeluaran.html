@@ -1,0 +1,70 @@
+<!-- Header Halaman -->
+<div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 hidden md:block">Catat Pengeluaran</h1>
+    <button id="btn-add-expense" class="bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors w-full sm:w-auto">
+        Tambah Pengeluaran
+    </button>
+</div>
+
+<!-- Tabel Riwayat Pengeluaran -->
+<div class="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
+     <table class="w-full text-left min-w-[600px]">
+        <thead class="border-b">
+            <tr>
+                <th class="p-4">ID</th>
+                <th class="p-4">Tanggal</th>
+                <th class="p-4">Deskripsi</th>
+                <th class="p-4">Jumlah</th>
+            </tr>
+        </thead>
+        <tbody id="expense-list">
+            <!-- PERUBAHAN: Skeleton Loader untuk riwayat pengeluaran -->
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+            </tr>
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-3/4"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+            </tr>
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Kontrol Paginasi -->
+<div id="pagination-controls" class="flex justify-between items-center mt-6"></div>
+
+
+<!-- Modal Tambah Pengeluaran -->
+<div id="expense-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50"></div>
+    <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-lg w-full p-6 relative transform transition-all scale-95 opacity-0">
+        <h3 class="text-2xl font-bold mb-6">Tambah Pengeluaran Baru</h3>
+        <form id="expense-form">
+            <div class="space-y-4">
+                <div>
+                    <label for="expense-description" class="block font-semibold mb-1">Deskripsi</label>
+                    <input type="text" id="expense-description" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Contoh: Bayar Listrik" required>
+                </div>
+                <div>
+                    <label for="expense-amount" class="block font-semibold mb-1">Jumlah (Rp)</label>
+                    <input type="number" id="expense-amount" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Contoh: 500000" required>
+                </div>
+            </div>
+             <div class="mt-6 flex justify-end space-x-3">
+                <button type="button" id="btn-cancel-expense" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>

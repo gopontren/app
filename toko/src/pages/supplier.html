@@ -1,0 +1,79 @@
+
+<!-- Header Halaman -->
+<div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+    <h1 class="text-3xl font-bold text-gray-800 hidden md:block">Manajemen Supplier</h1>
+    <!-- Grup Tombol dan Pencarian -->
+    <div class="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+        <input type="text" id="supplier-search-management" placeholder="Cari supplier..." class="w-full sm:w-auto p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        <button id="btn-add-supplier" class="w-full sm:w-auto bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex-shrink-0">
+            Tambah Supplier
+        </button>
+    </div>
+</div>
+
+<!-- Tabel Supplier -->
+<div class="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
+     <table class="w-full text-left min-w-[600px]">
+        <thead class="border-b">
+            <tr>
+                <th class="p-4">Nama Supplier</th>
+                <th class="p-4">Kontak</th>
+                <th class="p-4">Alamat</th>
+                <th class="p-4">Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="supplier-list">
+            <!-- PERUBAHAN: Skeleton Loader untuk tabel supplier -->
+            <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-3/4"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-24"></div></td>
+            </tr>
+             <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-1/2"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-3/4"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-24"></div></td>
+            </tr>
+             <tr class="animate-pulse">
+                <td class="p-4"><div class="skeleton skeleton-text w-3/4"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-2/3"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-full"></div></td>
+                <td class="p-4"><div class="skeleton skeleton-text w-24"></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Kontrol Paginasi -->
+<div id="pagination-controls" class="flex justify-between items-center mt-6"></div>
+
+<!-- Modal Tambah/Edit Supplier -->
+<div id="supplier-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50"></div>
+    <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-lg w-full p-6 relative transform transition-all scale-95 opacity-0">
+        <h3 id="supplier-modal-title" class="text-2xl font-bold mb-6">Tambah Supplier Baru</h3>
+        <form id="supplier-form">
+            <input type="hidden" id="supplier-id">
+            <div class="space-y-4">
+                <div>
+                    <label for="supplier-name" class="block font-semibold mb-1">Nama Supplier</label>
+                    <input type="text" id="supplier-name" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                </div>
+                <div>
+                    <label for="supplier-contact" class="block font-semibold mb-1">Kontak (Telp/Email)</label>
+                    <input type="text" id="supplier-contact" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                </div>
+                 <div>
+                    <label for="supplier-address" class="block font-semibold mb-1">Alamat</label>
+                    <textarea id="supplier-address" rows="3" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required></textarea>
+                </div>
+            </div>
+             <div class="mt-6 flex justify-end space-x-3">
+                <button type="button" id="btn-cancel-supplier" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>

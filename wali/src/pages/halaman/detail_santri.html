@@ -1,0 +1,106 @@
+<div class="relative">
+    <!-- Tombol Kembali -->
+    <a href="#home" class="absolute top-5 left-4 z-20 p-2 bg-black/20 rounded-full text-white hover:bg-black/40 transition">
+        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+    </a>
+    
+    <!-- Header Info Santri -->
+    <div class="relative h-48 bg-gradient-to-br from-emerald-500 to-green-600 rounded-b-[3rem] flex flex-col justify-end p-6 text-white shadow-lg">
+        <div class="flex items-center space-x-4">
+            <img id="detail-santri-avatar" src="https://placehold.co/64x64/e2e8f0/334155?text=..." alt="Foto Santri" class="w-16 h-16 rounded-full border-4 border-white/50 object-cover">
+            <div>
+                <h1 id="detail-santri-name" class="font-bold text-2xl">Memuat...</h1>
+                <p id="detail-santri-nis" class="text-sm opacity-80">NIS: ...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Konten dengan Navigasi Tab -->
+    <div class="relative -mt-4 z-10 px-4">
+        <div id="detail-nav" class="grid grid-cols-4 gap-1 bg-slate-200/80 backdrop-blur-md p-1 rounded-full mb-4 shadow-md text-sm font-semibold">
+            <button data-content="hafalan" class="py-2 px-2 rounded-full whitespace-nowrap transition-colors duration-300">Hafalan</button>
+            <button data-content="keuangan" class="py-2 px-2 rounded-full whitespace-nowrap transition-colors duration-300">Keuangan</button>
+            <button data-content="absensi" class="py-2 px-2 rounded-full whitespace-nowrap transition-colors duration-300">Absensi</button>
+            <button data-content="kesehatan" class="py-2 px-2 rounded-full whitespace-nowrap transition-colors duration-300">Kesehatan</button>
+        </div>
+
+        <!-- Kontainer untuk Konten Dinamis dari JS -->
+        <div id="detail-content-container" class="space-y-3 pb-8">
+            <!-- Skeleton Loader Awal -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm animate-pulse space-y-3">
+                <div class="h-4 bg-slate-200 rounded w-3/4"></div>
+                <div class="h-3 bg-slate-200 rounded w-full"></div>
+                <div class="h-3 bg-slate-200 rounded w-1/2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- [BARU] KUMPULAN TEMPLATE UNTUK KONTEN DETAIL SANTRI -->
+
+<!-- Template untuk ringkasan tab hafalan -->
+<template id="hafalan-summary-template">
+    <div class="grid grid-cols-3 gap-3 text-center mb-4 bg-white p-4 rounded-2xl shadow-sm animate-content-fade-in">
+        <div><p class="summary-juz text-2xl font-bold text-emerald-600">0</p><p class="text-xs font-semibold text-slate-500">Total Juz</p></div>
+        <div><p class="summary-surat text-2xl font-bold text-sky-600">0</p><p class="text-xs font-semibold text-slate-500">Total Surat</p></div>
+        <div><p class="summary-terakhir text-sm font-bold text-amber-600">-</p><p class="text-xs font-semibold text-slate-500">Setoran Terakhir</p></div>
+    </div>
+</template>
+
+<!-- Template untuk satu item riwayat hafalan -->
+<template id="hafalan-item-template">
+    <div class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm animate-content-fade-in" style="animation-delay: 50ms;">
+        <div>
+            <p class="hafalan-surat font-bold text-slate-800"></p>
+            <p class="hafalan-info text-sm text-slate-500"></p>
+        </div>
+        <span class="hafalan-nilai text-sm font-semibold"></span>
+    </div>
+</template>
+
+<!-- Template untuk satu item tagihan di tab keuangan -->
+<template id="keuangan-item-template">
+    <div class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm animate-content-fade-in">
+        <div>
+            <p class="keuangan-title font-bold text-slate-800"></p>
+            <p class="keuangan-status text-sm"></p>
+        </div>
+        <div class="text-right">
+            <p class="keuangan-amount font-semibold text-slate-700"></p>
+            <span class="keuangan-paid-status text-xs"></span>
+        </div>
+    </div>
+</template>
+
+<!-- Template untuk satu item riwayat absensi -->
+<template id="absensi-item-template">
+    <div class="bg-white rounded-2xl p-4 flex items-start gap-4 shadow-sm animate-content-fade-in">
+        <i data-lucide="" class="absensi-icon w-6 h-6 text-slate-400 mt-1"></i>
+        <div class="flex-1">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="absensi-title font-bold text-slate-800"></p>
+                    <p class="absensi-info text-xs text-slate-500"></p>
+                </div>
+                <span class="absensi-status text-sm font-semibold"></span>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Template untuk satu item riwayat kesehatan -->
+<template id="kesehatan-item-template">
+    <div class="bg-white rounded-2xl p-4 shadow-sm animate-content-fade-in">
+        <div class="flex justify-between items-start border-b pb-2 mb-2">
+             <div>
+                <p class="font-bold text-slate-800">Pemeriksaan UKS</p>
+                <p class="kesehatan-info text-xs text-slate-500"></p>
+             </div>
+             <span class="kesehatan-suhu text-sm font-semibold text-sky-600"></span>
+        </div>
+        <div class="text-sm">
+            <p><strong class="font-medium text-slate-600">Keluhan:</strong> <span class="kesehatan-keluhan"></span></p>
+            <p><strong class="font-medium text-slate-600">Tindakan:</strong> <span class="kesehatan-tindakan"></span></p>
+        </div>
+    </div>
+</template>

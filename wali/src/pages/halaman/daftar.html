@@ -1,0 +1,60 @@
+<section class="p-4">
+    <!-- Header Halaman -->
+    <div class="flex items-center mb-4">
+        <a href="#home" class="p-2 -ml-2 text-slate-500 hover:text-emerald-600">
+            <i data-lucide="arrow-left" class="w-6 h-6"></i>
+        </a>
+        <h2 class="text-lg font-bold text-slate-800 ml-2">Tagihan Pembayaran</h2>
+    </div>
+
+    <!-- [PERUBAHAN] Container untuk Pemilih Santri (Santri Switcher) -->
+    <div id="santri-switcher-container" class="mb-4">
+        <!-- Skeleton loader saat data sedang dimuat -->
+        <div class="bg-slate-200 rounded-2xl p-4 h-14 animate-pulse"></div>
+    </div>
+    <!-- Modal untuk daftar santri (awalnya disembunyikan) -->
+    <div id="santri-selection-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden items-end justify-center">
+        <div id="santri-modal-content" class="w-full max-w-md bg-slate-100 rounded-t-2xl shadow-xl p-4 transform transition-all duration-300 translate-y-full">
+            <h3 class="font-bold text-slate-800 text-center mb-4">Pilih Santri</h3>
+            <div id="santri-modal-list" class="space-y-2">
+                <!-- Daftar santri akan diisi oleh JS -->
+            </div>
+            <button id="close-santri-modal-btn" class="w-full mt-4 text-center text-slate-500 font-semibold py-3 bg-white rounded-xl">Tutup</button>
+        </div>
+    </div>
+
+
+    <!-- Ringkasan Total Tagihan -->
+    <div class="bg-white rounded-3xl p-6 mb-6 shadow-lg shadow-slate-200/50 text-center">
+        <p class="text-sm text-slate-500">Total Tagihan Belum Lunas</p>
+        <p id="total-tagihan" class="text-4xl font-bold text-red-600 my-1">Rp 0</p>
+        <p class="text-xs text-slate-400">Jatuh tempo terdekat: <span id="jatuh-tempo">Tidak ada</span></p>
+    </div>
+
+    <!-- Navigasi Tab -->
+    <div id="tagihan-nav" class="flex items-center bg-slate-200 p-1 rounded-full mb-4">
+        <button data-filter="unpaid" class="tagihan-btn flex-1 text-center py-2 px-3 rounded-full text-sm font-semibold">Belum Lunas</button>
+        <button data-filter="paid" class="tagihan-btn flex-1 text-center py-2 px-3 rounded-full text-sm font-semibold">Lunas</button>
+    </div>
+
+    <!-- Daftar Tagihan (akan diisi oleh JS) -->
+    <div id="tagihan-list" class="space-y-3">
+        <!-- Skeleton loader -->
+        <div class="bg-white rounded-2xl p-4 h-20 shadow-sm animate-pulse"></div>
+        <div class="bg-white rounded-2xl p-4 h-20 shadow-sm animate-pulse"></div>
+    </div>
+</section>
+
+<!-- [BARU] TEMPLATE UNTUK SATU ITEM TAGIHAN -->
+<template id="tagihan-item-template">
+    <div class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm">
+        <div>
+            <p class="tagihan-title font-bold text-slate-800"></p>
+            <p class="tagihan-status text-sm"></p>
+            <p class="tagihan-amount font-semibold text-slate-700 mt-1"></p>
+        </div>
+        <div class="tagihan-action">
+            <!-- Aksi (tombol bayar atau ikon lunas) akan dimasukkan di sini oleh JS -->
+        </div>
+    </div>
+</template>

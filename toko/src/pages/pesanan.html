@@ -1,0 +1,51 @@
+<h1 class="text-3xl font-bold text-gray-800 mb-6 hidden md:block">Pesanan Online</h1>
+<div class="bg-white rounded-lg shadow-md">
+    <!-- Navigasi Tab Status Pesanan -->
+    <div class="border-b border-gray-200">
+        <nav id="order-tabs" class="flex -mb-px space-x-1 px-4 whitespace-nowrap overflow-x-auto hide-scrollbar">
+            <!-- Tab Baru (Default Aktif) -->
+            <button data-status="baru" class="order-tab-btn flex-shrink-0 relative py-3 px-4 font-semibold text-blue-600 bg-blue-50 border-b-2 border-blue-600 rounded-t-lg">
+                Baru <span id="badge-baru" class="ml-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">0</span>
+            </button>
+            <!-- Tab Diproses -->
+            <button data-status="diproses" class="order-tab-btn flex-shrink-0 relative py-3 px-4 font-semibold text-gray-500 hover:text-blue-600 hover:bg-blue-50 border-b-2 border-transparent rounded-t-lg">
+                Diproses <span id="badge-diproses" class="ml-2 bg-gray-400 text-white text-xs px-2 py-1 rounded-full">0</span>
+            </button>
+             <!-- Tab Siap Diambil -->
+            <button data-status="siap_diambil" class="order-tab-btn flex-shrink-0 relative py-3 px-4 font-semibold text-gray-500 hover:text-blue-600 hover:bg-blue-50 border-b-2 border-transparent rounded-t-lg">
+                Siap Diambil <span id="badge-siap_diambil" class="ml-2 bg-gray-400 text-white text-xs px-2 py-1 rounded-full">0</span>
+            </button>
+            <!-- [BARU] Tab Dalam Pengantaran Internal -->
+            <button data-status="dalam_pengantaran_internal" class="order-tab-btn flex-shrink-0 relative py-3 px-4 font-semibold text-gray-500 hover:text-blue-600 hover:bg-blue-50 border-b-2 border-transparent rounded-t-lg">
+                Diantar Internal <span id="badge-dalam_pengantaran_internal" class="ml-2 bg-gray-400 text-white text-xs px-2 py-1 rounded-full">0</span>
+            </button>
+            <!-- Tab Sedang Diantar (oleh toko) -->
+            <button data-status="sedang_diantar" class="order-tab-btn flex-shrink-0 relative py-3 px-4 font-semibold text-gray-500 hover:text-blue-600 hover:bg-blue-50 border-b-2 border-transparent rounded-t-lg">
+                Diantar Toko <span id="badge-sedang_diantar" class="ml-2 bg-gray-400 text-white text-xs px-2 py-1 rounded-full">0</span>
+            </button>
+            <!-- Tab Selesai -->
+            <button data-status="selesai" class="order-tab-btn flex-shrink-0 relative py-3 px-4 font-semibold text-gray-500 hover:text-blue-600 hover:bg-blue-50 border-b-2 border-transparent rounded-t-lg">
+                Selesai <span id="badge-selesai" class="ml-2 bg-gray-400 text-white text-xs px-2 py-1 rounded-full">0</span>
+            </button>
+        </nav>
+    </div>
+    
+    <!-- Kontainer untuk Daftar Pesanan -->
+    <div id="order-list-container" class="p-4 space-y-4">
+        <!-- Skeleton Loader untuk kartu pesanan -->
+        <div class="animate-pulse space-y-4">
+            <div class="border rounded-lg p-4">
+                <div class="flex justify-between items-start">
+                    <div class="space-y-2 w-1/2">
+                        <div class="skeleton skeleton-text w-1/3 h-6"></div>
+                        <div class="skeleton skeleton-text w-full"></div>
+                    </div>
+                    <div class="space-y-2 w-1/4">
+                        <div class="skeleton skeleton-text h-6 ml-auto"></div>
+                        <div class="skeleton skeleton-text-short h-4 ml-auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

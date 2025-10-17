@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Koperasi - GoPontren</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="src/css/style.css">
+
+</head>
+<body class="bg-gray-100">
+    <div>
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden"></div>
+
+        <aside id="sidebar" class="bg-blue-800 text-white w-64 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-30 flex flex-col shadow-lg h-screen">
+            <div class="p-6 text-2xl font-bold border-b border-blue-700">
+                KoPontren
+            </div>
+            
+            <nav id="sidebar-nav" class="flex-1 p-4 space-y-1 overflow-y-auto">
+                <a href="#/" class="sidebar-item flex items-center p-3 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    Dashboard
+                </a>
+                <a href="#/pesanan" class="sidebar-item flex items-center p-3 rounded-lg relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    Pesanan Online
+                    <span id="order-notification-badge" class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                </a>
+                
+                <div class="pt-4">
+                    <p class="px-3 text-xs font-semibold uppercase text-blue-300">Operasional</p>
+                    <div class="mt-1 space-y-1">
+                        <a href="#/kasir" class="sidebar-item flex items-center p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                            Kasir
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="px-3 text-xs font-semibold uppercase text-blue-300">Inventaris</p>
+                    <div class="mt-1 space-y-1">
+                        <a href="#/produk" class="sidebar-item flex items-center p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            Produk
+                        </a>
+                        <a href="#/kategori" class="sidebar-item flex items-center p-3 rounded-lg">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                             Kategori Produk
+                        </a>
+                        <a href="#/supplier" class="sidebar-item flex items-center p-3 rounded-lg">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2-2h8a1 1 0 001-1z" /><path stroke-linecap="round" stroke-linejoin="round" d="M18 12h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V19a2 2 0 01-2 2h-1" /></svg>
+                             Supplier
+                        </a>
+                        <a href="#/pembelian" class="sidebar-item flex items-center p-3 rounded-lg">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                             Stok Masuk
+                        </a>
+                        <a href="#/stok_opname" class="sidebar-item flex items-center p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                             Stok Opname
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="px-3 text-xs font-semibold uppercase text-blue-300">Keuangan</p>
+                    <div class="mt-1 space-y-1">
+                        <a href="#/saldo" class="sidebar-item flex items-center p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                            </svg>
+                            Saldo E-Wallet
+                        </a>
+                        <a href="#/laporan" class="sidebar-item flex items-center p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            Laporan
+                        </a>
+                         <a href="#/pengeluaran" class="sidebar-item flex items-center p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                            Pengeluaran
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="md:ml-64 flex flex-col h-screen">
+            <header class="bg-white shadow-md p-4 flex justify-between items-center z-10">
+                <div class="flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-blue-600 focus:outline-none md:hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                    <div id="mobile-header" class="flex items-center text-blue-700 ml-3 md:ml-0">
+                         <span id="mobile-header-icon" class="w-6 h-6"></span>
+                         <h1 id="mobile-page-title" class="text-xl font-bold text-gray-800 ml-3"></h1>
+                    </div>
+                </div>
+
+                <!-- PENAMBAHAN BARU: Indikator Status Koneksi -->
+                <div id="connection-status" class="flex items-center gap-2 text-sm font-semibold">
+                    <!-- Konten akan diisi oleh ui.js -->
+                </div>
+
+                <div class="relative">
+                    <button id="profile-button" class="flex items-center space-x-2 focus:outline-none">
+                        <span class="font-semibold text-sm hidden sm:block">Kasir 1</span>
+                        <img src="https://placehold.co/40x40/E2E8F0/1E40AF?text=K" alt="Avatar" class="rounded-full w-10 h-10">
+                    </button>
+                    <div id="profile-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl z-20 hidden transform transition-all opacity-0 scale-95">
+                        <a href="#/notifikasi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 relative">
+                            Notifikasi
+                            <span id="notification-badge" class="absolute top-1/2 -translate-y-1/2 right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                        </a>
+                        <a href="#/pengaturan" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pengaturan</a>
+                    </div>
+                </div>
+            </header>
+            
+            <main id="app-content" class="p-6 lg:p-8 flex-1 overflow-y-auto bg-gray-100">
+                </main>
+        </div>
+    </div>
+
+    <div id="notification" class="notification fixed bottom-5 right-5 bg-green-500 text-white py-3 px-6 rounded-lg shadow-lg transform translate-y-20 opacity-0 z-50">
+        <p id="notification-message">Aksi berhasil!</p>
+    </div>
+
+    <div id="confirmation-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50"></div>
+        <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-md w-full p-6 relative transform transition-all scale-95 opacity-0">
+            <h3 class="text-xl font-bold mb-4">Konfirmasi</h3>
+            <div id="confirmation-message-container">
+                <p id="confirmation-message" class="text-gray-600 mb-6"></p>
+                <div id="confirmation-input-container" class="hidden">
+                    <label id="confirmation-input-label" for="confirmation-input-field" class="block font-semibold mb-1 text-sm"></label>
+                    <input type="text" id="confirmation-input-field" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    <p id="confirmation-input-error" class="text-red-500 text-xs mt-1 hidden"></p>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+                <button id="btn-confirm-cancel" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                <button id="btn-confirm-action" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700">Ya, Lanjutkan</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="change-account-modal" class="fixed inset-0 z-60 items-center justify-center hidden">
+        <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-60"></div>
+        <div class="modal-content bg-white rounded-lg shadow-xl m-4 sm:max-w-md w-full p-6 relative transform transition-all scale-95 opacity-0">
+            <h3 class="text-xl font-bold mb-4">Ubah Nomor Rekening</h3>
+            <p class="text-gray-600 mb-6 text-sm">Untuk keamanan, masukkan password Anda saat ini untuk melanjutkan.</p>
+            <form id="change-account-form">
+                <div class="space-y-4">
+                    <div>
+                        <label for="current-password-for-change" class="block font-semibold mb-1">Password Saat Ini</label>
+                        <input type="password" id="current-password-for-change" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label for="new-account-number" class="block font-semibold mb-1">Nomor Rekening Baru</label>
+                        <input type="text" id="new-account-number" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label for="confirm-new-account-number" class="block font-semibold mb-1">Konfirmasi Nomor Rekening Baru</label>
+                        <input type="text" id="confirm-new-account-number" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-8">
+                    <button type="button" id="btn-cancel-change-account" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300">Batal</button>
+                    <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <audio id="notification-sound" preload="auto">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU2LjM2LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAEAAABIwAAHwAAASrwRP14AAn3/7/8/A5//3//a//5/8//3/+/5//f/7/v/+///f/7/v/+///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAExhdmMAAAAAAAAAAAAAAAAAAAAAAAAEQAACAAADSAAA//OExGEAAd7/9/8/A6+///f/7/v/9//v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+///f/7/v/+==" type="audio/mpeg">
+    </audio>
+
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+    <script type="module" src="src/js/main.js"></script>
+
+</body>
+</html>
+

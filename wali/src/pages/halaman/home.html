@@ -1,0 +1,96 @@
+<div class="pt-24 px-4">
+    <!-- [PERUBAHAN] Kontainer slider sekarang memiliki padding horizontal untuk 'peek effect' -->
+    <div id="santri-slider-container" class="relative w-full max-w-md mx-auto overflow-hidden">
+        <!-- Track untuk menampung semua kartu santri -->
+        <div id="santri-slider-track" class="flex transition-transform duration-500 ease-in-out">
+            <!-- Skeleton Loader Awal untuk Kartu Santri -->
+            <div class="santri-slide w-full flex-shrink-0">
+                <div class="bg-gray-800 rounded-3xl p-6 h-[220px] animate-pulse"></div>
+            </div>
+        </div>
+        <!-- [BARU] Kontainer untuk Indikator Titik (Dots) -->
+        <div id="santri-slider-dots" class="absolute -bottom-1 left-0 right-0 flex justify-center items-center space-x-2 p-2">
+            <!-- Dots akan di-generate oleh home.js -->
+        </div>
+    </div>
+</div>
+
+<!-- Menu Utama (Tidak ada perubahan) -->
+<section class="my-6 px-4 relative z-20">
+    <div class="grid grid-cols-4 gap-2 text-center p-3 rounded-2xl glass-card">
+        <a href="#go-ngaji" class="flex flex-col items-center space-y-2 p-2 rounded-2xl hover:bg-white/80 transition-all duration-300 transform hover:-translate-y-1">
+            <div class="w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/30"><i data-lucide="book-open-check"></i></div>
+            <span class="text-xs font-semibold text-slate-700">Go-Ngaji</span>
+        </a>
+        <a href="#tagihan" class="flex flex-col items-center space-y-2 p-2 rounded-2xl hover:bg-white/80 transition-all duration-300 transform hover:-translate-y-1">
+            <div class="w-14 h-14 bg-amber-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/30"><i data-lucide="receipt"></i></div>
+            <span class="text-xs font-semibold text-slate-700">Tagihan</span>
+        </a>
+        <a href="#go-kop/home" class="flex flex-col items-center space-y-2 p-2 rounded-2xl hover:bg-white/80 transition-all duration-300 transform hover:-translate-y-1">
+            <div class="w-14 h-14 bg-sky-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-sky-500/30"><i data-lucide="shopping-cart"></i></div>
+            <span class="text-xs font-semibold text-slate-700">Go-Kop</span>
+        </a>
+        <a href="#komunitas/diskusi" class="flex flex-col items-center space-y-2 p-2 rounded-2xl hover:bg-white/80 transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-14 h-14 bg-fuchsia-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-fuchsia-500/30"><i data-lucide="users"></i></div>
+            <span class="text-xs font-semibold text-slate-700">Komunitas</span>
+        </a>
+    </div>
+</section>
+
+<!-- Linimasa (Tidak ada perubahan) -->
+<section class="px-4 pb-28">
+    <h2 class="text-lg font-bold text-slate-800 mb-4">Linimasa Terbaru</h2>
+    <div class="space-y-4">
+        <div class="bg-white rounded-2xl p-4 flex items-start space-x-4 shadow-md shadow-slate-200/50">
+            <div class="bg-sky-100 text-sky-600 rounded-full p-3 flex-shrink-0">
+                <i data-lucide="megaphone" class="w-6 h-6"></i>
+            </div>
+            <div>
+                <p class="font-bold text-slate-800">Info Jadwal Ujian</p>
+                <p class="text-sm text-slate-500">UAS Ganjil akan dimulai pada 15 September 2025.</p>
+            </div>
+        </div>
+        <a href="#go-ngaji" class="block bg-white rounded-2xl shadow-md shadow-slate-200/50 hover:shadow-lg transition-shadow overflow-hidden">
+            <img src="https://placehold.co/600x300/a7f3d0/166534?text=Artikel" alt="Thumbnail Artikel" class="w-full h-40 object-cover" loading="lazy">
+            <div class="p-4">
+                <p class="font-bold text-slate-800">Artikel Baru di Go-Ngaji</p>
+                <p class="text-sm text-slate-500 mt-1">"5 Tips Menjaga Semangat Menghafal Al-Qur'an" telah ditambahkan. Yuk, baca sekarang!</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- [BARU] TEMPLATE UNTUK KARTU SANTRI -->
+<template id="santri-card-template">
+    <div class="santri-slide w-full flex-shrink-0 px-2 box-border">
+        <div class="santri-card-inner bg-gradient-to-br from-[#202f41] to-[#2c3e50] rounded-3xl p-6 text-white relative border border-white/20 flex flex-col justify-between h-[220px]">
+            <a href="#" class="santri-detail-link flex items-center space-x-4">
+                <img src="" alt="Foto Santri" class="santri-avatar w-16 h-16 rounded-full border-4 border-emerald-400/50 object-cover" loading="lazy">
+                <div>
+                    <p class="santri-name font-bold text-xl"></p>
+                    <p class="santri-pondok text-sm opacity-80"></p>
+                </div>
+            </a>
+            <div class="grid grid-cols-2 gap-4 pt-4 mt-4 border-t border-white/10">
+                <div class="flex flex-col justify-between items-center p-2 rounded-lg">
+                    <a href="#" class="hafalan-link w-full text-center hover:bg-white/10 rounded-lg py-1 transition">
+                        <p class="text-xs opacity-80 mb-1">Hafalan Terakhir</p>
+                        <p class="santri-hafalan font-bold text-lg">-</p>
+                    </a>
+                </div>
+                <div class="flex flex-col justify-between items-center p-2 rounded-lg">
+                    <div class="w-full text-center">
+                        <p class="text-xs opacity-80 mb-1">Sisa Saldo Saku</p>
+                        <div class="flex items-baseline justify-center text-emerald-300">
+                            <span class="text-md font-semibold opacity-80 mr-1">Rp</span>
+                            <span class="santri-saldo text-2xl font-bold tracking-tight">0</span>
+                        </div>
+                    </div>
+                    <a href="#" class="topup-link mt-2 text-xs bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-1.5 px-4 rounded-full transition">
+                        + Isi Saldo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
