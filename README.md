@@ -42,7 +42,7 @@ Go-Pontren adalah platform multi-tenant yang menghubungkan:
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-username/gopontren.git
+git clone https://github.com/gopontren/app.git
 cd gopontren
 ```
 
